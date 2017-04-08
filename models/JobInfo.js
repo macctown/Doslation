@@ -7,45 +7,37 @@ var Doslation = require('./Doslation');
 
 var jobInfoSchema = new mongoose.Schema({
 
-    original: String,
+    type: String,
+
+    salary: String,
+
+    company: String,
+
+    description: String,
+
+    position_name: String,
 
     link: String,
 
-    isFinished: Boolean,
+    location: String,
 
-    pendingList: {
-        swahili: {
-            type: [
-                {type: Doslation}
-            ]
-        },
-        amharic: {
-            type: [
-                {type: Doslation}
-            ]
-        },
-        yoruba: {
-            type: [
-                {type: Doslation}
-            ]
-        }
-    },
+    counter: {type: Number, default: 0},
+
+    isFinished: { type: Boolean, default: false},
 
     pickedList: {
         swahili: {
-            type: [
-                {type: Doslation}
-            ]
+            type: mongoose.Schema.ObjectId,
+            ref: 'Doslation'
         },
+
         amharic: {
-            type: [
-                {type: Doslation}
-            ]
+            type: mongoose.Schema.ObjectId,
+            ref: 'Doslation'
         },
         yoruba: {
-            type: [
-                {type: Doslation}
-            ]
+            type: mongoose.Schema.ObjectId,
+            ref: 'Doslation'
         }
     }
 
