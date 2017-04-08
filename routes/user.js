@@ -159,6 +159,17 @@ var userController = {
         });
     },
 
+    /**
+     * GET /award
+     * Award page.
+     */
+    getAward : function(req, res) {
+        res.render('award', {
+            title: 'Award',
+            errors: req.flash("errors")
+        });
+    },
+
     getDashboard : function(req, res) {
         //get 5 job
 
