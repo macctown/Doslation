@@ -3,7 +3,7 @@
         <!-- small box -->
         <div class="small-box bg-aqua">
             <div class="inner">
-                <h3>150</h3>
+                <h3>{{user.doslationList.length}}</h3>
 
                 <p>Total Doslations</p>
             </div>
@@ -18,9 +18,9 @@
         <!-- small box -->
         <div class="small-box bg-green">
             <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
+                <h3>{{user.score}}</h3>
 
-                <p>Picked Rate</p>
+                <p>Doslation Points</p>
             </div>
             <div class="icon">
                 <i class="ion ion-stats-bars"></i>
@@ -33,7 +33,11 @@
         <!-- small box -->
         <div class="small-box bg-yellow">
             <div class="inner">
-                <h3>44</h3>
+                <h3>
+                    {{#calculate user.doslationList.length 100 "*"}}{{/calculate}}
+                    ~
+                    {{#calculate user.doslationList.length 200 "*"}}{{/calculate}}
+                </h3>
 
                 <p>People You Helped</p>
             </div>

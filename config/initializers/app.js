@@ -94,8 +94,18 @@ var start =  function(callback) {
                 else if(operator === "-"){
                     return lvalue - rvalue;
                 }
+                else if(operator === "*"){
+                    return lvalue * rvalue;
+                }
+
+            },
+
+            trimString: function(String, amount) {
+
+                return String.substring(0,amount);
 
             }
+
         }
     }));
     app.set('views', path.join(__dirname, '../../views'));
@@ -116,14 +126,8 @@ var start =  function(callback) {
     app.use(passport.initialize());
     app.use(passport.session());
     app.use(flash());
-    app.use( lusca.csrf() );
-    app.use(function(req, res, next) {
-        if (req.path === '/api/upload') {
-            next();
-        } else {
-            lusca.csrf()(req, res, next);
-        }
-    });
+    //app.use( lusca.csrf() );
+
     app.use(lusca.xframe('SAMEORIGIN'));
     app.use(lusca.xssProtection(true));
     app.use(function(req, res, next) {

@@ -2,7 +2,9 @@
  * Controllers (route handlers).
  */
 var homeController = require('./home');
+var jobController = require('./job');
 var userController = require('./user');
+var apiController = require('./api');
 var isAuthenticate = require('../auth/isAuthenticate');
 var passport = require('passport');
 
@@ -20,7 +22,10 @@ module.exports = function(app, passport, logger) {
      * Primary app routes.
      */
     app.get('/', homeController.index);
-    app.get('/doslation', userController.getDoslation);
+    app.get('/award', userController.getAward);
+    app.get('/doslationTo/:id', userController.getDoslation);
+    app.post('/doslation', userController.postDoslation);
+    app.get('/doslation/pending', userController.getPendingDoslation);
     app.get('/signin', userController.getLogin);
     app.post('/signin', userController.postLogin);
     app.get('/signout', userController.logout);
@@ -36,8 +41,13 @@ module.exports = function(app, passport, logger) {
     app.post('/account/password', isAuthenticate, userController.postUpdatePassword);
     app.post('/account/delete', isAuthenticate, userController.postDeleteAccount);
 
+    app.get('/jobs/:language', jobController.joblistByLanguage);
+
     //app.get('/api/upload', apiController.getFileUpload);
     //app.post('/api/upload', upload.single('myFile'), apiController.postFileUpload);
+
+    app.post('/api/v1/translation/:id', apiController.getTranslationByJobId);
+    app.post('/api/v1/translation/lan/:language', apiController.getTranslationByLanguage);
 
     // Set 404 response for non-exist api routes
     app.use(function(req, res, next) {

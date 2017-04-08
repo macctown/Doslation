@@ -4,6 +4,8 @@ var crypto = require('crypto');
 var nodemailer = require('nodemailer');
 var passport = require('passport');
 var User = require('../models/User');
+var Job = require('../models/Job');
+var Doslation = require('../models/Doslation');
 
 
 var userController = {
@@ -20,9 +22,83 @@ var userController = {
     },
 
     getDoslation: function(req, res, next){
+        var jobId = req.param('id');
+
+        Job.findOne({ _id: jobId }, function(err, job) {
+            if (err) {
+                req.flash('errors', { msg: err});
+                return res.redirect('/dashboard');
+            }
+            else{
+                job["score"] = parseInt(job["description"].length / 66);
+                res.render('doslation', {
+                    title: 'Submit Your Doslation',
+                    subtitle: 'Submit Your Doslation',
+                    jobInfo: job
+                });
+            }
+        });
+
+
+    },
+
+    postDoslation : function(req, res, next) {
         "use strict";
-        res.render('doslation', {
-            subtitle: 'Submit Your Doslation'
+        var language = req.body.language;
+        var jobId = req.body.jobId;
+        var translation = req.body.translation;
+        var userEmail = req.user.email;
+        var score = req.body.score;
+
+        //create donslation
+        var ObjectID = require('mongodb').ObjectID;
+
+        var doslation = new Doslation({
+            language: language,
+            translation: translation,
+            jobRef: jobId,
+            _id: new ObjectID()
+        });
+
+        doslation.save(function (err, results) {
+
+            var newDoslationId = results._id;
+            //update user info
+            User.update(
+                {email: userEmail},
+                {
+                    $push: { doslationList: newDoslationId },
+                    $inc: {["score"]: score}
+                },
+                function (err, updatedUser) {
+                    if (err) {
+                        req.flash('errors', { msg: err});
+                        return res.redirect('/dashboard');
+                    }
+                    else {
+
+                        Job.update(
+                            {_id: jobId},
+                            {
+                                $inc: { ["counter"]: 1 },
+                                $push: { pickedList: newDoslationId },
+                            },
+                            function (err, updatedJob) {
+                                if (err) {
+                                    req.flash('errors', { msg: err});
+                                    return res.redirect('/dashboard');
+                                }
+                                else{
+                                    req.flash('success', { msg: "Successfully Translate a Job Info and get " + score + " points!"});
+                                    return res.redirect('/dashboard');
+                                }
+                            });
+                    }
+
+                });
+
+
+
         });
     },
 
@@ -47,7 +123,6 @@ var userController = {
                 return next(err);
             }
             if (!user) {
-                console.log(info);
                 req.flash('errors', info);
                 return res.redirect('/signin');
             }
@@ -85,10 +160,38 @@ var userController = {
     },
 
     getDashboard : function(req, res) {
-        "use strict";
-        res.render('dashboard', {
-            title: 'Dashboard',
-            subtitle: 'Doslation List'
+        //get 5 job
+
+        Job.find().limit(5).exec(function (err, jobs) {
+            if(err){
+                req.flash('errors', error);
+                return res.redirect('/dashboard');
+            }
+            else{
+                jobs.map(function (job) {
+                   job["score"] = parseInt(job["description"].length / 66);
+                });
+                res.render('dashboard', {
+                    title: 'Dashboard',
+                    subtitle: 'Doslation List',
+                    jobInfo: jobs,
+                    errors: req.flash("errors"),
+                    success: req.flash("success")
+                });
+            }
+        });
+
+    },
+
+
+    /**
+     * GET /award
+     * Award page.
+     */
+    getAward : function(req, res) {
+        res.render('award', {
+            title: 'Award',
+            errors: req.flash("errors")
         });
     },
 
@@ -228,28 +331,6 @@ var userController = {
     },
 
     /**
-     * GET /account/unlink/:provider
-     * Unlink OAuth provider.
-     */
-    getOauthUnlink : function(req, res, next) {
-        var provider = req.params.provider;
-        User.findById(req.user.id, function(err, user) {
-            if (err) {
-                return next(err);
-            }
-            user[provider] = undefined;
-            user.tokens = _.reject(user.tokens, function(token) { return token.kind === provider; });
-            user.save(function(err) {
-                if (err) {
-                    return next(err);
-                }
-                req.flash('info', { msg: provider + ' account has been unlinked.' });
-                res.redirect('/account');
-            });
-        });
-    },
-
-    /**
      * GET /reset/:token
      * Reset Password page.
      */
@@ -356,6 +437,32 @@ var userController = {
         });
     },
 
+    getPendingDoslation: function(req, res){
+        "use strict";
+
+        User
+            .findOne({ email: req.user.email })
+            .populate('doslationList')
+            .exec(function (err, list) {
+                if (err) {
+                    req.flash('errors', { msg: 'Woops! Something wrong in DB.' });
+                    return res.redirect('/dashboard');
+                }
+
+                var newList = [];
+                list.doslationList.map(function (job) {
+                    newList.push(job);
+                });
+
+                res.render('pending', {
+                    title: 'My Pending Doslation',
+                    subtitle: 'Pending Doslations List',
+                    dosList: newList
+                });
+            });
+
+    },
+
     /**
      * POST /forgot
      * Create a random token, then the send user an email with a reset link.
@@ -421,5 +528,6 @@ var userController = {
     }
 
 };
+
 
 module.exports = userController;

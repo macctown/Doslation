@@ -15,14 +15,15 @@ var userSchema = new mongoose.Schema({
         name: { type: String, default: '' },
         picture: { type: String, default: '' },
         notification:{ email: { type: Boolean, default: true }},
-        score: { type: Number, default: 0 },
-        level: { type: Number, default: 0 }
     },
 
-    doslationList: {
+    score: { type: Number, default: 0 },
+    level: { type: Number, default: 0 },
+
+    doslationList: [{
         type: mongoose.Schema.ObjectId,
         ref: 'Doslation'
-    }
+    }]
 
 }, { timestamps: true });
 

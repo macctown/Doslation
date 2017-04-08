@@ -14,7 +14,7 @@ var doslationSchema = new mongoose.Schema({
 
     jobRef: {
         type: mongoose.Schema.ObjectId,
-        ref: 'JobInfo'
+        ref: 'Job'
     }
 
 }, { timestamps: true });

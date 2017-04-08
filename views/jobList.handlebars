@@ -1,0 +1,39 @@
+<table border="1px">
+
+    <tbody>
+
+        <tr>
+            <th>
+                Translation
+            </th>
+            <th>
+                Date
+            </th>
+            <th>
+                Job Ref#
+            </th>
+        </tr>
+
+        {{#jobs}}
+            <tr>
+                <th>
+                    {{#translation}}
+                        {{this}}
+                    {{/translation}}
+                </th>
+                <th>
+                    {{#createdAt}}
+                        {{this}}
+                    {{/createdAt}}
+                </th>
+                <th>
+                    {{#jobRef}}
+                        {{this}}
+                    {{/jobRef}}
+                </th>
+            </tr>
+        {{/jobs}}
+
+    </tbody>
+
+</table>

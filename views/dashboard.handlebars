@@ -12,6 +12,7 @@
             </h1>
         </section>
 
+        {{> flash}}
         <!-- Main content -->
         <section class="content">
             <!-- Small boxes (Stat box) -->
@@ -21,12 +22,15 @@
             <div class="row">
                 <div class="col-md-12">
                     <!-- Box Comment -->
+{{#each jobInfo}}
                     <div class="box box-widget collapsed-box">
                         <div class="box-header with-border">
                             <div class="user-block">
-                                <img class="img-circle" src="../dist/img/user1-128x128.jpg" alt="User Image">
-                                <span class="username"><a href="#">Company/Title Name</a></span>
-                                <span class="description">Published at - 7:30 PM</span>
+                                <img class="img-circle" src="../dist/img/user1-128x128.png" alt="User Image">
+
+                                <span class="username"><a href="/doslationTo/{{_id}}">Company: {{this.company}} | Title: {{this.position_name}}</a></span>
+                                <span class="username"><button type="button" class="btn btn-danger btn-xs"><i class="fa fa-winner"></i> {{this.score}} Points</button> | {{this.counter}} Answers</span>
+                                <a href="{{this.link}}" target="_blank" class="btn btn-default btn-sm pull-right">Job Detail</a>
                             </div>
                             <!-- /.user-block -->
                             <div class="box-tools">
@@ -38,193 +42,26 @@
                         <!-- /.box-header -->
                         <div class="box-body">
                             <!-- post text -->
-                            <p>Far far away, behind the word mountains, far from the
-                                countries Vokalia and Consonantia, there live the blind
-                                texts. Separated they live in Bookmarksgrove right at</p>
-
-                            <p>the coast of the Semantics, a large language ocean.
-                                A small river named Duden flows by their place and supplies
-                                it with the necessary regelialia. It is a paradisematic
-                                country, in which roasted parts of sentences fly into
-                                your mouth.</p>
+                            <h3>Company: </h3>{{this.company}}
+                            <h3>Title: </h3>{{this.position_name}}
+                            <h3>Salary: </h3>{{this.salary}}
+                            <h3>Description: </h3>
+                            {{{this.description}}}
                             <!-- /.attachment-block -->
 
                             <!-- Social sharing buttons -->
                             <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> Share</button>
-                            <button type="button" class="btn btn-danger btn-xs"><i class="fa fa-winner"></i> 10 Points</button>
-                            <span class="pull-right text-muted">12 Doslations</span>
+                            <button type="button" class="btn btn-danger btn-xs"><i class="fa fa-winner"></i> {{this.score}} Points</button>
+                            <span class="pull-right text-muted">{{this.counter}} Doslations</span>
                         </div>
                         <!-- /.box-body -->
                         <!-- /.box-footer -->
                         <div class="box-footer" align="right">
-                            <a href="/doslation" class="btn btn-success btn-lg"><i class="fa fa-pencil"></i> Doslation it!</a>
+                            <a href="/doslationTo/{{this._id}}" class="btn btn-success btn-lg"><i class="fa fa-pencil"></i> Doslation it!</a>
                         </div>
                         <!-- /.box-footer -->
                     </div>
-
-                    <div class="box box-widget collapsed-box">
-                        <div class="box-header with-border">
-                            <div class="user-block">
-                                <img class="img-circle" src="../dist/img/user1-128x128.jpg" alt="User Image">
-                                <span class="username"><a href="#">Company/Title Name</a></span>
-                                <span class="description">Published at - 7:30 PM</span>
-                            </div>
-                            <!-- /.user-block -->
-                            <div class="box-tools">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                                </button>
-                            </div>
-                            <!-- /.box-tools -->
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body">
-                            <!-- post text -->
-                            <p>Far far away, behind the word mountains, far from the
-                                countries Vokalia and Consonantia, there live the blind
-                                texts. Separated they live in Bookmarksgrove right at</p>
-
-                            <p>the coast of the Semantics, a large language ocean.
-                                A small river named Duden flows by their place and supplies
-                                it with the necessary regelialia. It is a paradisematic
-                                country, in which roasted parts of sentences fly into
-                                your mouth.</p>
-                            <!-- /.attachment-block -->
-
-                            <!-- Social sharing buttons -->
-                            <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> Share</button>
-                            <button type="button" class="btn btn-danger btn-xs"><i class="fa fa-winner"></i> 10 Points</button>
-                            <span class="pull-right text-muted">12 Doslations</span>
-                        </div>
-                        <!-- /.box-body -->
-                        <!-- /.box-footer -->
-                        <div class="box-footer" align="right">
-                            <a href="/doslation" class="btn btn-success btn-lg"><i class="fa fa-pencil"></i> Doslation it!</a>
-                        </div>
-                        <!-- /.box-footer -->
-                    </div>
-
-                    <div class="box box-widget collapsed-box">
-                        <div class="box-header with-border">
-                            <div class="user-block">
-                                <img class="img-circle" src="../dist/img/user1-128x128.jpg" alt="User Image">
-                                <span class="username"><a href="#">Company/Title Name</a></span>
-                                <span class="description">Published at - 7:30 PM</span>
-                            </div>
-                            <!-- /.user-block -->
-                            <div class="box-tools">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                                </button>
-                            </div>
-                            <!-- /.box-tools -->
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body">
-                            <!-- post text -->
-                            <p>Far far away, behind the word mountains, far from the
-                                countries Vokalia and Consonantia, there live the blind
-                                texts. Separated they live in Bookmarksgrove right at</p>
-
-                            <p>the coast of the Semantics, a large language ocean.
-                                A small river named Duden flows by their place and supplies
-                                it with the necessary regelialia. It is a paradisematic
-                                country, in which roasted parts of sentences fly into
-                                your mouth.</p>
-                            <!-- /.attachment-block -->
-
-                            <!-- Social sharing buttons -->
-                            <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> Share</button>
-                            <button type="button" class="btn btn-danger btn-xs"><i class="fa fa-winner"></i> 10 Points</button>
-                            <span class="pull-right text-muted">12 Doslations</span>
-                        </div>
-                        <!-- /.box-body -->
-                        <!-- /.box-footer -->
-                        <div class="box-footer" align="right">
-                            <a href="/doslation" class="btn btn-success btn-lg"><i class="fa fa-pencil"></i> Doslation it!</a>
-                        </div>
-                        <!-- /.box-footer -->
-                    </div>
-
-                    <div class="box box-widget collapsed-box">
-                        <div class="box-header with-border">
-                            <div class="user-block">
-                                <img class="img-circle" src="../dist/img/user1-128x128.jpg" alt="User Image">
-                                <span class="username"><a href="#">Company/Title Name</a></span>
-                                <span class="description">Published at - 7:30 PM</span>
-                            </div>
-                            <!-- /.user-block -->
-                            <div class="box-tools">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                                </button>
-                            </div>
-                            <!-- /.box-tools -->
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body">
-                            <!-- post text -->
-                            <p>Far far away, behind the word mountains, far from the
-                                countries Vokalia and Consonantia, there live the blind
-                                texts. Separated they live in Bookmarksgrove right at</p>
-
-                            <p>the coast of the Semantics, a large language ocean.
-                                A small river named Duden flows by their place and supplies
-                                it with the necessary regelialia. It is a paradisematic
-                                country, in which roasted parts of sentences fly into
-                                your mouth.</p>
-                            <!-- /.attachment-block -->
-
-                            <!-- Social sharing buttons -->
-                            <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> Share</button>
-                            <button type="button" class="btn btn-danger btn-xs"><i class="fa fa-winner"></i> 10 Points</button>
-                            <span class="pull-right text-muted">12 Doslations</span>
-                        </div>
-                        <!-- /.box-body -->
-                        <!-- /.box-footer -->
-                        <div class="box-footer" align="right">
-                            <a href="/doslation" class="btn btn-success btn-lg"><i class="fa fa-pencil"></i> Doslation it!</a>
-                        </div>
-                        <!-- /.box-footer -->
-                    </div>
-
-                    <div class="box box-widget collapsed-box">
-                        <div class="box-header with-border">
-                            <div class="user-block">
-                                <img class="img-circle" src="../dist/img/user1-128x128.jpg" alt="User Image">
-                                <span class="username"><a href="#">Company/Title Name</a></span>
-                                <span class="description">Published at - 7:30 PM</span>
-                            </div>
-                            <!-- /.user-block -->
-                            <div class="box-tools">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                                </button>
-                            </div>
-                            <!-- /.box-tools -->
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body">
-                            <!-- post text -->
-                            <p>Far far away, behind the word mountains, far from the
-                                countries Vokalia and Consonantia, there live the blind
-                                texts. Separated they live in Bookmarksgrove right at</p>
-
-                            <p>the coast of the Semantics, a large language ocean.
-                                A small river named Duden flows by their place and supplies
-                                it with the necessary regelialia. It is a paradisematic
-                                country, in which roasted parts of sentences fly into
-                                your mouth.</p>
-                            <!-- /.attachment-block -->
-
-                            <!-- Social sharing buttons -->
-                            <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> Share</button>
-                            <button type="button" class="btn btn-danger btn-xs"><i class="fa fa-winner"></i> 10 Points</button>
-                            <span class="pull-right text-muted">12 Doslations</span>
-                        </div>
-                        <!-- /.box-body -->
-                        <!-- /.box-footer -->
-                        <div class="box-footer" align="right">
-                            <a href="/doslation" class="btn btn-success btn-lg"><i class="fa fa-pencil"></i> Doslation it!</a>
-                        </div>
-                        <!-- /.box-footer -->
-                    </div>
+{{/each}}
                     <!-- /.box -->
                     <button type="button" class="btn btn-default btn-block"><i class="fa fa-repeat"></i> More</button>
                 </div>
