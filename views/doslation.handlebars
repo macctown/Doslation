@@ -72,9 +72,9 @@
                                                     <span class="caret"></span>
                                                 </button>
                                                 <ul class="dropdown-menu btn btn-default btn-lg" aria-labelledby="dropdownMenu1">
-                                                    <li ><button class="btn btn-default" id="swahiliBtn">Arabic</button></li>
-                                                    <li><button class="btn btn-default" id="amharicBtn">Pashto</button></li>
-                                                    <li><button class="btn btn-default" id="yorubaBtn">Albanian</button></li>
+                                                    <li ><button class="btn btn-default" id="arabicBtn">Arabic</button></li>
+                                                    <li><button class="btn btn-default" id="pashtoBtn">Pashto</button></li>
+                                                    <li><button class="btn btn-default" id="albanianBtn">Albanian</button></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -99,18 +99,18 @@
 </div>
 <!-- /#wrapper -->
 <script>
-    $( "#swahiliBtn" ).click(function() {
-        $("#languageInput").val("swahili");
+    $( "#arabicBtn" ).click(function() {
+        $("#languageInput").val("arabic");
         $("#doslationForm").submit();
     });
 
-    $( "#amharicBtn" ).click(function() {
-        $("#languageInput").val("amharic");
+    $( "#pashtoBtn" ).click(function() {
+        $("#languageInput").val("pashto");
         $("#doslationForm").submit();
     });
 
-    $( "#yorubaBtn" ).click(function() {
-        $("#languageInput").val("yoruba");
+    $( "#albanianBtn" ).click(function() {
+        $("#languageInput").val("albanian");
         $("#doslationForm").submit();
     });
 </script>
