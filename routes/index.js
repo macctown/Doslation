@@ -30,6 +30,7 @@ module.exports = function(app, passport, logger) {
     app.post('/reset/:token', userController.postReset);
     app.get('/signup', userController.getSignup);
     app.post('/signup', userController.postSignup);
+    app.get('/award', userController.getAward);
     app.get('/dashboard', isAuthenticate, userController.getDashboard);
     app.get('/account', isAuthenticate, userController.getAccount);
     app.post('/account/profile', isAuthenticate, userController.postUpdateProfile);
